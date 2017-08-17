@@ -1,11 +1,11 @@
 {
-    "name": "OnSite3D/DataConnections", //ex: smarty/smarty should be unique
+    "name": "OnSite3D/DataConnection", 
     "description": "Core PHP Framework",
     "type": "project",
     "license": "MIT",
     "keywords": [ "php", "framework", "Core", "Core PHP Framework" ],
     "autoload": {
-        "psr-4": { "Core\\": "src/Core" }
+        "psr-4": { "SuiteCORE\\": "src/SuiteCORE" }
     },
     "prefer-stable": true,
     "require": {
@@ -22,15 +22,6 @@
             "name": "Sean Davis",
             "email": "sdavis@onsite3d.cs"
         }
-    ],
-    "scripts": {
-        "post-install-cmd": [
-            "bower install",
-            "Core\\Scripts\\installer::install"
-        ],
-        "post-update-cmd": [
-            "bower install",
-            "Core\\Scripts\\installer::install"
-        ]
-    }
+    ]
+    
 }

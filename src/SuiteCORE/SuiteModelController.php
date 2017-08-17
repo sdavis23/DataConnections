@@ -1,6 +1,6 @@
 <?php
 
-namespace App\SuiteComponents;
+namespace SuiteCORE\SuiteModelController;
 
 /*
 
@@ -15,9 +15,6 @@ abstract class SuiteModelController
 {
 
 	
-
-
-
 
 	/* 
 		Returns an array of the field names to include

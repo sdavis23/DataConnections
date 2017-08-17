@@ -13,9 +13,7 @@
 	Date: June 12th 2017
 */
 
-namespace App\SuiteComponents;
-use App\ClientModels\PointCloud;
-
+namespace SuiteCORE\SuiteModelController;
 
 class SuiteClient 
 {
