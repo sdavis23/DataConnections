@@ -13,7 +13,6 @@
 	Date: June 12th 2017
 */
 
-namespace SuiteCORE\SuiteModelController;
 
 class SuiteClient 
 {
