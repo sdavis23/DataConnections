@@ -5,7 +5,7 @@
     "license": "MIT",
     "keywords": [ "php", "framework", "Core", "Core PHP Framework" ],
     "autoload": {
-        "psr-0": { "SuiteCORE": "src/SuiteCORE/" }
+        "psr-0": { "SuiteCORE": "./src/SuiteCORE/" }
     },
     "prefer-stable": true,
     "require": {
