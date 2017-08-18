@@ -15,6 +15,15 @@ namespace DataConnection\SuiteCORE;
 abstract class SuiteModelController
 {
 
+	protected $client;
+
+	public function __construct($suite_client)
+	{
+
+		$this->client = $suite_client;
+
+	}
+
 	
 
 	/* 
@@ -48,9 +57,9 @@ abstract class SuiteModelController
 	*/
 	abstract protected function moduleName();
 
-	public function getModelObject($client, $id)
+	public function getModelObject($id)
 	{
-		$result = $client->getModelDataSingle($this->moduleName(), $id, $this->getFields(), $this->getLinkedFields());
+		$result = $this->client->getModelDataSingle($this->moduleName(), $id, $this->getFields(), $this->getLinkedFields());
 		$relations = array();
 
 
@@ -79,7 +88,7 @@ abstract class SuiteModelController
 		max_results - the maximum number of results to return
 		
 	*/
-	public function getModelObjects($client, $query, $order_by, $max_results)
+	public function getModelObjects($query, $order_by, $max_results)
 	{
 		/*return array_map(	[$this, "jsonObjectToModelObject"], 
 							$client->getModelData($this->moduleName(), 
@@ -89,7 +98,7 @@ abstract class SuiteModelController
 										$max_results, 
 										$this->getLinkedFields())); */
 
-		$entry_value_list = $client->getModelData($this->moduleName(), 
+		$entry_value_list = $this->client->getModelData($this->moduleName(), 
 										$query, 
 										$order_by, 
 										$this->getFields(), 
@@ -104,12 +113,18 @@ abstract class SuiteModelController
 	
 	}
 
+
+	/*
+		
+		Synynom for getModelObject
+
+	*/
 	public function getModelById($id)
 	{
 
-		$client = new MainSuiteClient();
+		
 
-		return $this->getModelObject($client, $id);
+		return $this->getModelObject($id);
 	}
 
 	/**
@@ -122,11 +137,11 @@ abstract class SuiteModelController
      * @param max_results - the maximum number of results to return
      * @return the model that corresponds to this particular controller
      */
-	public function getRelatedModelObjects($client, $owner_module_name, $owner_id, $relationship_name, $query, $order_by, $max_results)
+	public function getRelatedModelObjects($owner_module_name, $owner_id, $relationship_name, $query, $order_by, $max_results)
 	{
 
 		$entry_value_list = 
-			$client->retrieveRelatedRecords($owner_module_name,
+			$this->client->retrieveRelatedRecords($owner_module_name,
 						$owner_id,
 						$relationship_name,
 						$query,
