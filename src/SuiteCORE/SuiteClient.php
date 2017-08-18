@@ -13,6 +13,7 @@
 	Date: June 12th 2017
 */
 
+namespace DataConnection\SuiteCORE;
 
 class SuiteClient 
 {

@@ -9,6 +9,8 @@
 
 */
 
+namespace DataConnection\SuiteCORE;
+
 
 abstract class SuiteModelController
 {
