@@ -107,8 +107,7 @@ abstract class SuiteModelController
 
 
 
-		//echo "Entry: " . print_r($entry_value_list, true);
-		//return print_r($entry_value_list, true);
+		
 		return array_map([$this, "jsonObjectToModelObject"], $entry_value_list->entry_list, $entry_value_list->relationship_list);
 	
 	}
@@ -125,6 +124,18 @@ abstract class SuiteModelController
 		
 
 		return $this->getModelObject($id);
+	}
+
+	protected function successResponse($msg)
+	{
+
+		return array("status" => "SUCC", "msg" => $msg);
+	}
+
+	protected function failureResponse($msg)
+	{
+
+		return array("status" => "FAIL", "msg" => $msg);
 	}
 
 	/**
@@ -185,7 +196,7 @@ abstract class SuiteModelController
 	*/
 	protected function getFirstLinkedValue($model_array, $relationship_index)
 	{
-		if($this->getAllLinkedValues($model_array, $relationship_index)> 0)
+		if(count($this->getAllLinkedValues($model_array, $relationship_index)) > 0)
 		{
 
 			return $this->getAllLinkedValues($model_array, $relationship_index)[0];
@@ -203,12 +214,17 @@ abstract class SuiteModelController
 	protected function getAllLinkedValues($model_array, $relationship_index)
 	{
 		
-
-		//echo "Linked Field: " . print_r($model_array, true);
-
+		
+		
+		if(count($model_array['linked_fields']) == 0)
+		{
+			
+			return array();
+		}
 
 		if(isset($model_array['linked_fields']->link_list))
 		{
+
 
 			if(count($model_array['linked_fields']->link_list) > 0)
 			{
@@ -216,12 +232,15 @@ abstract class SuiteModelController
 			}
 			else
 			{
+
 				return array();
 			}			
 
 		}
+
+
 		else
-		{
+		{	
 			
 			return array_map([$this, "suiteRelatedRecordToLinkValue"], $model_array['linked_fields'][$relationship_index]->records);
 		}

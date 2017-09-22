@@ -232,8 +232,11 @@ class SuiteClient
     *   @param related_id - the id of the field we are relating
     *   @param related_field_name - the name of the field we are relating
     **/
-    public function setRelationship($module_name, $module_id, $related_id, $related_field_name)
+    public function setRelationship($module_name, $module_id, $related_id, $related_field_name, $delete = 0)
     {
+
+       
+
 
         $set_relationship_parameters = array(
              //session id
@@ -257,7 +260,7 @@ class SuiteClient
             'name_value_list' => array(),
 
             //Whether or not to delete the relationship. 0:create, 1:delete
-            'delete'=> 0,
+            'delete'=> $delete,
         );
 
         //echo "Module ID: " . $module_id;
@@ -311,7 +314,7 @@ class SuiteClient
             "name_value_list" => $vals, );
         
 
-          //echo "Client SAVE: " . print_r($vals, true);
+          //echo "Client SAVE: " . print_r($this->call('set_entry', $set_entry_parameters, $this->url), true);
           return  $this->call('set_entry', $set_entry_parameters, $this->url);
     }
 
